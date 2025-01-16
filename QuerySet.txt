@@ -1,0 +1,20 @@
+Список QuerySet запросов для заполнения БД
+(.venv) PS C:\PycharmProjects2\UrbanDjango2> python manage.py shell
+Python 3.9.0 (tags/v3.9.0:9cf6752, Oct  5 2020, 15:34:40) [MSC v.1927 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from task1.models import Buyer
+>>> first_buyer = Buyer.objects.create(name='Sergei', balance=2500.0, age=16)
+>>> second_buyer = Buyer.objects.create(name='Oleg', balance=4000.0, age=24)   
+>>> third_buyer = Buyer.objects.create(name='Anton', balance=8000.0, age=45)  
+>>> from task1.models import Game
+>>> first_game = Game.objects.create(title = 'Stalker', cost=1800.0, size = 1.8)  
+>>> second_game = Game.objects.create(title = 'Stalker-2', cost=2800.0, size = 3.8, age_limited = True)
+>>> third_game = Game.objects.create(title = 'God of war', cost=4800.0, size = 53.8, age_limited = True) 
+>>> Buyer.objects.all()
+<QuerySet [<Buyer: Sergei>, <Buyer: Oleg>, <Buyer: Anton>]>
+>>> Game.objects.all()
+<QuerySet [<Game: Stalker>, <Game: Stalker-2>, <Game: God of war>]>
+>>> Game.objects.get(id=1).buyer.set((first_buyer, second_buyer))
+>>> Game.objects.get(id=2).buyer.set((second_buyer, third_buyer))  
+>>> Game.objects.get(id=3).buyer.set((second_buyer, third_buyer))  
